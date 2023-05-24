@@ -28,6 +28,17 @@ if [ "$backup_choice" == "y" ]; then
   echo "Backup of smb.conf created at $backup_dir/smb.conf.bak"
 fi
 
+# Check if user wants to support SMBv1
+read -p "Would you like to support the legacy version of SMB protocol (SMBv1)? (y/n): " smb1_choice
+if [ "$smb1_choice" == "y" ]; then
+  if ! grep -q "client min protocol = NT1" /etc/samba/smb.conf; then
+    sed -i '/\[global\]/a \   client min protocol = NT1' /etc/samba/smb.conf
+    echo "SMBv1 support enabled."
+  else
+    echo "SMBv1 support is already enabled."
+  fi
+fi
+
 # Check if user wants to create a new Samba user
 read -p "Would you like to create a new Samba user? (y/n): " user_choice
 if [ "$user_choice" == "y" ]; then
