@@ -16,15 +16,16 @@ fi
 tail -n +2 "$inputFile" | while read -r line; do
     # Ping the URL 4 times
     ping -c 4 $line > /dev/null 2>&1
-
+    
+    # Get the exit status of the ping command (0 means at least one successful ping)
+    ping_exit_status=$?
+    
     # Get the current date
     date=$(date +%Y-%m-%d)
 
-    # Check the exit status of the ping command (0 means at least one successful ping)
-    if [ $? -eq 0 ]; then
+    if [ $ping_exit_status -eq 0 ]; then
         echo "$line,Yes,$date" >> $outputFile
     else
         echo "$line,No,$date" >> $outputFile
     fi
 done
-
