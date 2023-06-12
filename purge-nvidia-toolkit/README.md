@@ -40,7 +40,3 @@ You will be prompted to enter your password.
 * This script will completely remove your Nvidia driver and CUDA toolkit, be sure that's what you want before running it.
 * As this script needs to run with root privileges, ensure that you trust the source and understand what the script does before running it.
 * Always back up any important data before making significant changes to your system.
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
